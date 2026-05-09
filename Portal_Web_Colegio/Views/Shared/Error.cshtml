@@ -1,0 +1,20 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Algo salió mal</h1>
+<h2 class="text-danger">No pudimos completar lo que pediste. Intentá de nuevo en un ratito.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p class="text-muted">
+        <small>Si necesitás ayuda, anotá este código y comunicate con secretaría: <code>@Model.RequestId</code></small>
+    </p>
+}
+
+<environment include="Development">
+    <div class="alert alert-warning mt-3">
+        <p class="mb-0"><strong>Solo en modo desarrollo:</strong> revisá la salida del servidor o la consola para más detalle sobre el error.</p>
+    </div>
+</environment>
