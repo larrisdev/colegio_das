@@ -1,0 +1,30 @@
+@model Portal_Web_Colegio.Models.Expediente
+
+@{
+    ViewData["Title"] = "Quitar expediente";
+}
+
+<h1>Quitar expediente</h1>
+
+<h3 class="text-danger">¿Seguro que querés quitar este expediente?</h3>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Estudiante</dt>
+    <dd class="col-sm-9">@Model?.Alumno?.Apellido, @Model?.Alumno?.Nombre</dd>
+
+    <dt class="col-sm-3">Materia</dt>
+    <dd class="col-sm-9">@Model?.Materia?.NombreMateria</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NotaFinal)</dt>
+    <dd class="col-sm-9">@Model?.NotaFinal.ToString("0.00")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Observaciones)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Observaciones)</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ExpedienteId" />
+    <button type="submit" class="btn btn-danger">Sí, quitar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

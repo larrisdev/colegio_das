@@ -1,0 +1,27 @@
+@model Portal_Web_Colegio.Models.Expediente
+
+@{
+    ViewData["Title"] = "Ficha del expediente";
+}
+
+<h1>Ficha del expediente</h1>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Estudiante</dt>
+    <dd class="col-sm-9">@Model?.Alumno?.Apellido, @Model?.Alumno?.Nombre</dd>
+
+    <dt class="col-sm-3">Materia</dt>
+    <dd class="col-sm-9">@Model?.Materia?.NombreMateria</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NotaFinal)</dt>
+    <dd class="col-sm-9">@Model?.NotaFinal.ToString("0.00")</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Observaciones)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Observaciones)</dd>
+</dl>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ExpedienteId" class="btn btn-warning">Corregir</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>
