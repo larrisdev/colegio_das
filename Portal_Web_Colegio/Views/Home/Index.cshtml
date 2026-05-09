@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5">Colegio San José</h1>
+    <p class="lead text-muted">Acá podés llevar el control de expedientes escolares: estudiantes, materias, calificaciones y observaciones.</p>
+</div>
+
+<div class="row g-3 justify-content-center">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Estudiantes</h2>
+                <p class="card-text small">Altas, bajas y cambios de datos del alumnado.</p>
+                <a class="btn btn-primary" asp-controller="Alumno" asp-action="Index">Ver estudiantes</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Materias</h2>
+                <p class="card-text small">Listado de materias y docentes que las imparten.</p>
+                <a class="btn btn-primary" asp-controller="Materia" asp-action="Index">Ver materias</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Expedientes</h2>
+                <p class="card-text small">Calificación final y observaciones por estudiante y materia.</p>
+                <a class="btn btn-primary" asp-controller="Expediente" asp-action="Index">Ver expedientes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 justify-content-center mt-2">
+    <div class="col-md-6">
+        <div class="card h-100 border-secondary shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Promedios</h2>
+                <p class="card-text small">Promedio de calificaciones por estudiante.</p>
+                <a class="btn btn-outline-secondary" asp-controller="Alumno" asp-action="PromedioNotas">Consultar promedios</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 border-secondary shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 card-title">Estadísticas</h2>
+                <p class="card-text small">Resumen visual según las calificaciones registradas.</p>
+                <a class="btn btn-outline-secondary" asp-controller="Estadisticas" asp-action="Index">Ver resumen</a>
+            </div>
+        </div>
+    </div>
+</div>
