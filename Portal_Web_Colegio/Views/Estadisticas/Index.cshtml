@@ -1,0 +1,108 @@
+@model Portal_Web_Colegio.Models.EstadisticasViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Resumen";
+    var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+}
+
+<h1>Resumen estadístico</h1>
+<p class="text-muted">Distribución de calificaciones y promedio por estudiante.</p>
+
+@if (!Model.TieneDatos)
+{
+    <div class="alert alert-info">
+        Todavía no hay datos para mostrar. Primero registrá <a asp-controller="Alumno" asp-action="Index">estudiantes</a>,
+        <a asp-controller="Materia" asp-action="Index">materias</a> y después los
+        <a asp-controller="Expediente" asp-action="Index">expedientes</a>.
+    </div>
+}
+else
+{
+    <p>Total de calificaciones registradas: <strong>@Model.TotalExpedientes</strong></p>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-header">Promedio por estudiante</div>
+                <div class="card-body" style="max-height: 420px;">
+                    <canvas id="chartPromedios"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card shadow-sm">
+                <div class="card-header">Distribución de notas</div>
+                <div class="card-body">
+                    <canvas id="chartDistribucion"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <a asp-controller="Alumno" asp-action="PromedioNotas" class="btn btn-outline-primary">Ver cuadro de promedios</a>
+    </p>
+}
+
+@section Scripts {
+    @if (Model.TieneDatos)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+        <script>
+            const labelsProm = @Html.Raw(JsonSerializer.Serialize(Model.EtiquetasPromedioPorAlumno, jsonOptions));
+            const dataProm = @Html.Raw(JsonSerializer.Serialize(Model.ValoresPromedioPorAlumno, jsonOptions));
+            const labelsPie = @Html.Raw(JsonSerializer.Serialize(Model.EtiquetasDistribucionNotas, jsonOptions));
+            const dataPie = @Html.Raw(JsonSerializer.Serialize(Model.CantidadesDistribucionNotas, jsonOptions));
+
+            const ctxBar = document.getElementById('chartPromedios');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: labelsProm,
+                    datasets: [{
+                        label: 'Promedio',
+                        data: dataProm,
+                        backgroundColor: 'rgba(13, 110, 253, 0.55)',
+                        borderColor: 'rgba(13, 110, 253, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 10, title: { display: true, text: 'Nota (0–10)' } },
+                        x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 35 } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const ctxPie = document.getElementById('chartDistribucion');
+            new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: labelsPie,
+                    datasets: [{
+                        data: dataPie,
+                        backgroundColor: [
+                            'rgba(220, 53, 69, 0.75)',
+                            'rgba(253, 126, 20, 0.75)',
+                            'rgba(255, 193, 7, 0.75)',
+                            'rgba(25, 135, 84, 0.75)',
+                            'rgba(13, 110, 253, 0.75)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        </script>
+    }
+}
