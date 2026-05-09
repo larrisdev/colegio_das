@@ -1,0 +1,31 @@
+@model Portal_Web_Colegio.Models.Alumno
+
+@{
+    ViewData["Title"] = "Dar de baja estudiante";
+}
+
+<h1>Dar de baja estudiante</h1>
+
+<h4 class="text-danger">Esta acción va a quitar al estudiante y los expedientes que tenga ligados.</h4>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Apellido)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellido)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FechaNacimiento)</dt>
+        <dd class="col-sm-9">@Model.FechaNacimiento.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Grado)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Grado)</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="AlumnoId" />
+        <button type="submit" class="btn btn-danger">Confirmar baja</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

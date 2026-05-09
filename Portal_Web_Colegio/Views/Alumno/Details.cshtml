@@ -1,0 +1,29 @@
+@model Portal_Web_Colegio.Models.Alumno
+
+@{
+    ViewData["Title"] = "Ficha del estudiante";
+}
+
+<h1>Ficha del estudiante</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Apellido)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Apellido)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FechaNacimiento)</dt>
+        <dd class="col-sm-9">@Model.FechaNacimiento.ToString("yyyy-MM-dd")</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Grado)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Grado)</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AlumnoId" class="btn btn-warning">Corregir</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>

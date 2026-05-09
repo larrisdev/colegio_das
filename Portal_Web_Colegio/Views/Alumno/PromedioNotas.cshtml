@@ -1,0 +1,38 @@
+@model IEnumerable<PromedioNotaRowViewModel>
+
+@{
+    ViewData["Title"] = "Promedios";
+}
+
+<h1>Promedio de calificaciones por estudiante</h1>
+
+<p>
+    <a asp-action="Index" class="btn btn-secondary">Volver a estudiantes</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Promedio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@($"{item.Alumno?.Nombre} {item.Alumno?.Apellido}")</td>
+                    <td>@string.Format("{0:F2}", item.Promedio)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        Todavía no hay calificaciones cargadas para sacar el promedio.
+    </div>
+}
