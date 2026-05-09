@@ -1,0 +1,21 @@
+@model Portal_Web_Colegio.Models.Materia
+
+@{
+    ViewData["Title"] = "Ficha de la materia";
+}
+
+<h1>Ficha de la materia</h1>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NombreMateria)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.NombreMateria)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Docente)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Docente)</dd>
+</dl>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MateriaId" class="btn btn-warning">Corregir</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>

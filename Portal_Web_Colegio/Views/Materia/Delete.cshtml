@@ -1,0 +1,24 @@
+@model Portal_Web_Colegio.Models.Materia
+
+@{
+    ViewData["Title"] = "Quitar materia";
+}
+
+<h1>Quitar materia</h1>
+
+<h3 class="text-danger">¿Seguro que querés quitar esta materia?</h3>
+
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.NombreMateria)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.NombreMateria)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Docente)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(model => model.Docente)</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="MateriaId" />
+    <button type="submit" class="btn btn-danger">Sí, quitar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
